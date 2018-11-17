@@ -11,18 +11,18 @@ random-string()
 CONFIG_FILE=/etc/shadowsocks.json
 SERVICE_FILE=/etc/systemd/system/shadowsocks.service
 SS_PASSWORD=$(random-string 32)
-SS_PORT=8388
+SS_PORT=8887
 SS_METHOD=aes-256-cfb
 SS_IP=`ip route get 1 | awk '{print $NF;exit}'`
 GET_PIP_FILE=/tmp/get-pip.py
 
 # install pip
 curl "https://bootstrap.pypa.io/get-pip.py" -o "${GET_PIP_FILE}"
-python ${GET_PIP_FILE}
+sudo python ${GET_PIP_FILE}
 
 # install shadowsocks
-pip install --upgrade pip
-pip install shadowsocks
+sudo pip install --upgrade pip
+sudo pip install shadowsocks
 
 # create shadowsocls config
 cat <<EOF | sudo tee ${CONFIG_FILE}
